@@ -1,0 +1,136 @@
+/* 富文本编辑器强制样式 - 最高优先级 */
+
+/* 使用 !important 和超高优先级选择器强制覆盖所有样式 */
+
+/* 最强优先级：使用属性选择器、类选择器、伪类选择器组合 */
+html[data-theme="dark"] body .w-e-text-container,
+html[data-theme="dark"] body div.w-e-text-container,
+html[data-theme="dark"] body .rich-editor-wrapper .w-e-text-container,
+html[data-theme="dark"] body .experience-form-page .w-e-text-container,
+html[data-theme="dark"] body .knowledge-form-page .w-e-text-container {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  background: #1e1e1e !important;
+}
+
+html[data-theme="dark"] body .w-e-text,
+html[data-theme="dark"] body div.w-e-text,
+html[data-theme="dark"] body .w-e-text-container .w-e-text,
+html[data-theme="dark"] body .rich-editor-wrapper .w-e-text,
+html[data-theme="dark"] body .experience-form-page .w-e-text,
+html[data-theme="dark"] body .knowledge-form-page .w-e-text {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  background: #1e1e1e !important;
+  caret-color: #ffffff !important;
+}
+
+/* 使用属性选择器和多重选择器确保最高优先级 */
+[data-theme="dark"] .w-e-text-container,
+[data-theme="dark"] div.w-e-text-container,
+[data-theme="dark"] .rich-editor-wrapper .w-e-text-container,
+[data-theme="dark"] .rich-editor-wrapper div.w-e-text-container {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .w-e-text,
+[data-theme="dark"] div.w-e-text,
+[data-theme="dark"] .w-e-text-container .w-e-text,
+[data-theme="dark"] .w-e-text-container div.w-e-text,
+[data-theme="dark"] .rich-editor-wrapper .w-e-text,
+[data-theme="dark"] .rich-editor-wrapper div.w-e-text {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  caret-color: #ffffff !important;
+}
+
+/* 强制所有子元素颜色 - 使用超高优先级 */
+html[data-theme="dark"] body .w-e-text *,
+html[data-theme="dark"] body .w-e-text span,
+html[data-theme="dark"] body .w-e-text div,
+html[data-theme="dark"] body .w-e-text p,
+html[data-theme="dark"] body .w-e-text h1,
+html[data-theme="dark"] body .w-e-text h2,
+html[data-theme="dark"] body .w-e-text h3,
+html[data-theme="dark"] body .w-e-text h4,
+html[data-theme="dark"] body .w-e-text h5,
+html[data-theme="dark"] body .w-e-text h6,
+html[data-theme="dark"] body .w-e-text strong,
+html[data-theme="dark"] body .w-e-text b,
+html[data-theme="dark"] body .w-e-text em,
+html[data-theme="dark"] body .w-e-text i,
+html[data-theme="dark"] body .w-e-text u,
+html[data-theme="dark"] body .w-e-text li,
+[data-theme="dark"] .w-e-text *,
+[data-theme="dark"] .w-e-text span,
+[data-theme="dark"] .w-e-text div,
+[data-theme="dark"] .w-e-text p,
+[data-theme="dark"] .w-e-text h1,
+[data-theme="dark"] .w-e-text h2,
+[data-theme="dark"] .w-e-text h3,
+[data-theme="dark"] .w-e-text h4,
+[data-theme="dark"] .w-e-text h5,
+[data-theme="dark"] .w-e-text h6,
+[data-theme="dark"] .w-e-text strong,
+[data-theme="dark"] .w-e-text b,
+[data-theme="dark"] .w-e-text em,
+[data-theme="dark"] .w-e-text i,
+[data-theme="dark"] .w-e-text u,
+[data-theme="dark"] .w-e-text li {
+  color: #ffffff !important;
+}
+
+/* 处理可能存在的内联样式 */
+[data-theme="dark"] .w-e-text[style],
+[data-theme="dark"] .w-e-text-container[style] {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .w-e-text [style*="color"],
+[data-theme="dark"] .w-e-text [style*="Color"] {
+  color: #ffffff !important;
+}
+
+/* 占位符文本 */
+[data-theme="dark"] .w-e-text-placeholder {
+  color: #9e9e9e !important;
+}
+
+/* 选择文本样式 */
+[data-theme="dark"] .w-e-text::selection,
+[data-theme="dark"] .w-e-text *::selection {
+  background-color: rgba(144, 202, 249, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* 工具栏样式 */
+[data-theme="dark"] .w-e-toolbar {
+  background-color: #2d2d2d !important;
+  border-color: #424242 !important;
+}
+
+[data-theme="dark"] .w-e-toolbar .w-e-bar-item {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .w-e-toolbar .w-e-bar-item:hover {
+  background-color: #424242 !important;
+  color: #90caf9 !important;
+}
+
+[data-theme="dark"] .w-e-toolbar .w-e-bar-item.w-e-bar-item-active {
+  background-color: #90caf9 !important;
+  color: #ffffff !important;
+}
+
+/* 确保编辑器容器也有正确的背景 */
+[data-theme="dark"] .editor-container {
+  background-color: #1e1e1e !important;
+}
+
+[data-theme="dark"] .rich-editor-wrapper {
+  background-color: #1e1e1e !important;
+  border-color: #424242 !important;
+} 

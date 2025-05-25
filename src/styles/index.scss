@@ -1,0 +1,63 @@
+// 变量定义
+$font-family-base: 'Poppins', 'Inter', 'Roboto', sans-serif;
+$color-text: rgba(255, 255, 255, 0.87);
+$color-bg: #080710;
+$color-link-hover: #747bff;
+$color-button-bg: #f9f9f9;
+
+// 混合器
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 基础重置和变量
+:root {
+  font-family: $font-family-base;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: $color-text;
+  background-color: $color-bg;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  @include font-smoothing;
+}
+
+// 移除默认的按钮、标题等样式，避免与Element Plus和自定义组件冲突
+
+// 移除 body 的flex布局，避免与App.vue冲突
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: $color-bg;
+}
+
+// 移除默认的App容器样式，避免限制宽度
+#app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+// 覆盖浅色模式设置
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #ffffff;
+    background-color: $color-bg;
+  }
+
+  body {
+    background-color: $color-bg;
+  }
+
+  a {
+    &:hover {
+      color: $color-link-hover;
+    }
+  }
+
+  button {
+    background-color: $color-button-bg;
+  }
+}

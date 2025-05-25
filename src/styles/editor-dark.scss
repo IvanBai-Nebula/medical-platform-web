@@ -1,0 +1,321 @@
+/* 富文本编辑器深色模式样式 */
+
+// 为深色模式优化 wangEditor 样式 - 使用更高优先级的选择器
+[data-theme="dark"] {
+  // wangEditor 工具栏样式
+  .w-e-toolbar {
+    background-color: var(--color-bg-secondary) !important;
+    border-color: var(--color-border-primary) !important;
+    
+    .w-e-bar-item {
+      color: var(--color-text-primary) !important;
+      
+      &:hover {
+        background-color: var(--color-bg-primary) !important;
+        color: var(--color-primary) !important;
+      }
+      
+      &.w-e-bar-item-active {
+        background-color: var(--color-primary) !important;
+        color: white !important;
+      }
+      
+      // 图标颜色
+      svg {
+        fill: currentColor !important;
+      }
+    }
+    
+    .w-e-bar-divider {
+      background-color: var(--color-border-secondary) !important;
+    }
+  }
+  
+  // wangEditor 编辑区域样式
+  .w-e-text-container {
+    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-border-primary) !important;
+    color: var(--color-text-primary) !important;
+    
+    .w-e-text {
+      color: var(--color-text-primary) !important;
+      
+      // 确保所有文本元素继承正确颜色
+      * {
+        color: inherit !important;
+      }
+      
+      // 占位符样式
+      .w-e-text-placeholder {
+        color: var(--color-text-muted) !important;
+      }
+      
+      // 段落和标题
+      p, h1, h2, h3, h4, h5, h6 {
+        color: var(--color-text-primary) !important;
+      }
+      
+      // 列表
+      ul, ol, li {
+        color: var(--color-text-primary) !important;
+      }
+      
+      // 引用块
+      blockquote {
+        background-color: var(--color-bg-secondary) !important;
+        border-left-color: var(--color-primary) !important;
+        color: var(--color-text-primary) !important;
+      }
+      
+      // 代码
+      code {
+        background-color: var(--color-bg-secondary) !important;
+        color: var(--color-text-primary) !important;
+      }
+      
+      pre {
+        background-color: var(--color-bg-secondary) !important;
+        color: var(--color-text-primary) !important;
+        
+        code {
+          background-color: transparent !important;
+          color: inherit !important;
+        }
+      }
+      
+      // 表格
+      table {
+        th, td {
+          border-color: var(--color-border-secondary) !important;
+          color: var(--color-text-primary) !important;
+        }
+        
+        th {
+          background-color: var(--color-bg-secondary) !important;
+        }
+      }
+      
+      // 链接
+      a {
+        color: var(--color-primary) !important;
+        
+        &:hover {
+          color: var(--color-primary-dark, var(--color-primary)) !important;
+        }
+      }
+      
+      // 强调文本
+      strong, b, em, i, u, ins {
+        color: var(--color-text-primary) !important;
+      }
+      
+      // 删除线
+      s, del {
+        color: var(--color-text-secondary) !important;
+      }
+    }
+  }
+  
+  // 下拉菜单和弹窗样式
+  .w-e-drop-panel,
+  .w-e-modal {
+    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-border-primary) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    
+    .w-e-dp-item,
+    .w-e-modal-item {
+      color: var(--color-text-primary) !important;
+      
+      &:hover {
+        background-color: var(--color-bg-secondary) !important;
+      }
+    }
+    
+    // 输入框样式
+    input, textarea, select {
+      background-color: var(--color-bg-primary) !important;
+      border-color: var(--color-border-primary) !important;
+      color: var(--color-text-primary) !important;
+      
+      &:focus {
+        border-color: var(--color-primary) !important;
+        box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.2) !important;
+      }
+      
+      &::placeholder {
+        color: var(--color-text-muted) !important;
+      }
+    }
+    
+    // 按钮样式
+    .w-e-button {
+      background-color: var(--color-primary) !important;
+      color: white !important;
+      border-color: var(--color-primary) !important;
+      
+      &:hover {
+        background-color: var(--color-primary-dark, var(--color-primary)) !important;
+      }
+      
+      &.w-e-button-cancel {
+        background-color: var(--color-bg-secondary) !important;
+        color: var(--color-text-primary) !important;
+        border-color: var(--color-border-primary) !important;
+        
+        &:hover {
+          background-color: var(--color-bg-primary) !important;
+        }
+      }
+    }
+  }
+  
+  // 颜色选择器
+  .w-e-color-panel {
+    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-border-primary) !important;
+    
+    .w-e-color-item {
+      border-color: var(--color-border-secondary) !important;
+    }
+  }
+  
+  // 表情选择器
+  .w-e-emotion-panel {
+    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-border-primary) !important;
+    
+    .w-e-emotion-item {
+      &:hover {
+        background-color: var(--color-bg-secondary) !important;
+      }
+    }
+  }
+  
+  // 图片上传
+  .w-e-upload-img-panel {
+    background-color: var(--color-bg-elevated) !important;
+    border-color: var(--color-border-primary) !important;
+    
+    .w-e-upload-img-item {
+      background-color: var(--color-bg-secondary) !important;
+      border-color: var(--color-border-secondary) !important;
+      color: var(--color-text-primary) !important;
+      
+      &:hover {
+        border-color: var(--color-primary) !important;
+      }
+    }
+  }
+  
+  // 光标和选择样式
+  .w-e-text {
+    caret-color: var(--color-primary) !important;
+    
+    ::selection {
+      background-color: rgba(var(--color-primary-rgb), 0.3) !important;
+      color: var(--color-text-primary) !important;
+    }
+  }
+  
+  // 分割线
+  .w-e-bar-divider {
+    background-color: var(--color-border-secondary) !important;
+  }
+}
+
+// 确保在深色模式下编辑器容器有正确的背景
+[data-theme="dark"] .rich-editor-wrapper {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-border-primary);
+  
+  .editor-toolbar {
+    background-color: var(--color-bg-secondary);
+    border-bottom-color: var(--color-border-secondary);
+  }
+  
+  .editor-container {
+    background-color: var(--color-bg-elevated);
+  }
+}
+
+// 最高优先级的强制样式 - 覆盖所有可能的冲突样式
+[data-theme="dark"] .w-e-text-container,
+[data-theme="dark"] .w-e-text-container .w-e-text,
+[data-theme="dark"] .rich-editor-wrapper .w-e-text-container,
+[data-theme="dark"] .rich-editor-wrapper .w-e-text-container .w-e-text {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+}
+
+// 强制所有文本元素在深色模式下使用正确颜色
+[data-theme="dark"] .w-e-text * {
+  color: var(--color-text-primary) !important;
+}
+
+// 处理可能的内联样式覆盖
+[data-theme="dark"] .w-e-text[style*="color"],
+[data-theme="dark"] .w-e-text [style*="color"] {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme="dark"] .w-e-text-container[style*="background"],
+[data-theme="dark"] .w-e-text[style*="background"] {
+  background-color: var(--color-bg-elevated) !important;
+}
+
+// 特殊处理：确保编辑器文本在任何情况下都可见
+[data-theme="dark"] {
+  .w-e-text-container .w-e-text {
+    // 重要：强制文本颜色和背景
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-bg-elevated) !important;
+    
+    // 处理继承问题
+    * {
+      color: inherit !important;
+    }
+    
+    // 特殊处理一些可能被重置的元素
+    span, div, p, h1, h2, h3, h4, h5, h6, 
+    strong, b, em, i, u, ins, li {
+      color: var(--color-text-primary) !important;
+    }
+    
+    // 确保输入的新内容也是正确颜色
+    &[contenteditable="true"] {
+      color: var(--color-text-primary) !important;
+    }
+  }
+  
+  // 额外的强制规则
+  .w-e-text-container {
+    background-color: var(--color-bg-elevated) !important;
+    color: var(--color-text-primary) !important;
+    
+    .w-e-text {
+      background-color: var(--color-bg-elevated) !important;
+      color: var(--color-text-primary) !important;
+    }
+  }
+  
+  // 直接针对编辑器容器的规则
+  .rich-editor-wrapper {
+    .editor-container {
+      background-color: var(--color-bg-elevated) !important;
+      
+      .w-e-text-container {
+        background-color: var(--color-bg-elevated) !important;
+        
+        .w-e-text {
+          background-color: var(--color-bg-elevated) !important;
+          color: var(--color-text-primary) !important;
+          
+          * {
+            color: var(--color-text-primary) !important;
+          }
+        }
+      }
+    }
+  }
+} 

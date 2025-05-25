@@ -1,0 +1,309 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+// === 主题颜色变量系统 ===
+
+// 明亮主题颜色
+:root,
+:root.light,
+[data-theme='light'] {
+  // === 基础颜色 ===
+  --color-primary: #1976d2; // 标准蓝色
+  --color-primary-light: #42a5f5; // 浅蓝色
+  --color-primary-dark: #1565c0; // 深蓝色
+  --color-secondary: #9c27b0; // 紫色
+  --color-accent: #ff9800; // 橙色
+
+  // === 语义颜色 ===
+  --color-success: #4caf50; // 绿色
+  --color-warning: #ff9800; // 橙色
+  --color-error: #f44336; // 红色
+  --color-info: #2196f3; // 蓝色
+
+  // === 背景颜色 ===
+  --color-bg-primary: #ffffff; // 纯白
+  --color-bg-secondary: #f5f5f5; // 浅灰
+  --color-bg-tertiary: #eeeeee; // 中灰
+  --color-bg-elevated: #ffffff; // 白色卡片
+  --color-bg-overlay: rgba(255, 255, 255, 0.9); // 半透明白
+
+  // === 文本颜色 ===
+  --color-text-primary: #212121; // 深灰
+  --color-text-secondary: #757575; // 中灰
+  --color-text-tertiary: #9e9e9e; // 浅灰
+  --color-text-muted: #bdbdbd; // 很浅灰
+  --color-text-inverse: #333333; // 深色文本用于浅色背景
+
+  // === 边框颜色 ===
+  --color-border-primary: #e0e0e0; // 浅边框
+  --color-border-secondary: #bdbdbd; // 中等边框
+  --color-border-focus: #1976d2; // 焦点蓝
+
+  // === 阴影 ===
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+  // === 通用颜色 ===
+  --color-medical-blue: #2196f3;
+  --color-medical-green: #4caf50;
+  --color-medical-red: #f44336;
+  --color-medical-orange: #ff9800;
+
+  // === 卡片和组件 ===
+  --color-card-bg: #ffffff;
+  --color-card-border: #e0e0e0;
+  --color-input-bg: #ffffff;
+  --color-input-border: #bdbdbd;
+  --color-button-primary: #1565c0; /* 深蓝色按钮 */
+  --color-button-secondary: #757575;
+
+  // === 渐变 ===
+  --gradient-primary: linear-gradient(135deg, #1845ad 0%, #23a2f6 100%);
+  --gradient-secondary: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%); /* 浅色主题：协调的紫蓝色 */
+  --gradient-success: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  --gradient-warning: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+  --gradient-accent: linear-gradient(135deg, #7986cb 0%, #9fa8da 100%); /* 浅色主题：柔和的淡紫色 */
+
+  // === 页面背景渐变 ===
+  --gradient-page-bg: linear-gradient(180deg, #e3f2fd 0%, #f3e5f5 50%, #fff3e0 100%);
+  --gradient-hero-bg: linear-gradient(135deg, #e3f2fd 0%, #e8eaf6 25%, #f3e5f5 50%, #fce4ec 75%, #fff3e0 100%);
+  --gradient-features-bg: linear-gradient(135deg, #f3e5f5 0%, #e8f5e8 30%, #e3f2fd 70%, #fff3e0 100%);
+  --gradient-content-bg: linear-gradient(135deg, #fff3e0 0%, #f3e5f5 30%, #e3f2fd 70%, #e8f5e8 100%);
+  --gradient-section-title: linear-gradient(135deg, #1565c0, #9c27b0, #ff9800);
+
+  // === 玻璃拟态效果 ===
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-input-bg: rgba(255, 255, 255, 0.3);
+  --glass-input-focus: rgba(255, 255, 255, 0.4);
+  --shadow-glass: 0 0 40px rgba(0, 0, 0, 0.1);
+
+  // === 按钮样式 ===
+  --color-button-text: #ffffff; /* 白色文字 */
+  --color-button-primary-hover: #0d47a1; /* 更深的蓝色悬停 */
+
+  // === 特殊文本颜色 ===
+  --color-text-placeholder: #455a64; /* 深色占位符文字 */
+  --color-text-inverse: #1a237e; /* 深蓝色文字用于玻璃表单 */
+
+  // === 登录页面专用背景 ===
+  --color-login-bg: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%); /* 浅蓝色渐变背景 */
+}
+
+// 黑暗主题颜色
+:root.dark,
+[data-theme='dark'] {
+  // === 基础颜色 ===
+  --color-primary: #90caf9; // 亮蓝色
+  --color-primary-light: #bbdefb; // 更亮蓝
+  --color-primary-dark: #64b5f6; // 中蓝色
+  --color-secondary: #ce93d8; // 亮紫色
+  --color-accent: #ffb74d; // 亮橙色
+
+  // === 语义颜色 ===
+  --color-success: #81c784; // 亮绿色
+  --color-warning: #ffb74d; // 亮橙色
+  --color-error: #e57373; // 亮红色
+  --color-info: #64b5f6; // 亮蓝色
+
+  // === 背景颜色 ===
+  --color-bg-primary: #121212; // 深黑
+  --color-bg-secondary: #1e1e1e; // 中黑
+  --color-bg-tertiary: #2d2d2d; // 浅黑
+  --color-bg-elevated: #1e1e1e; // 深灰卡片
+  --color-bg-overlay: rgba(18, 18, 18, 0.9); // 半透明黑
+
+  // === 文本颜色 ===
+  --color-text-primary: #ffffff; // 白色
+  --color-text-secondary: #e0e0e0; // 浅灰
+  --color-text-tertiary: #bdbdbd; // 中灰
+  --color-text-muted: #9e9e9e; // 暗灰
+  --color-text-inverse: #ffffff;
+
+  // === 边框颜色 ===
+  --color-border-primary: #424242; // 深边框
+  --color-border-secondary: #616161; // 中等边框
+  --color-border-focus: #90caf9; // 焦点亮蓝
+
+  // === 阴影 ===
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+  // === 通用颜色 ===
+  --color-medical-blue: #64b5f6;
+  --color-medical-green: #81c784;
+  --color-medical-red: #e57373;
+  --color-medical-orange: #ffb74d;
+
+  // === 卡片和组件 ===
+  --color-card-bg: #1e1e1e;
+  --color-card-border: #424242;
+  --color-input-bg: #2d2d2d;
+  --color-input-border: #616161;
+  --color-button-primary: #e0e0e0; /* 浅灰色按钮 */
+  --color-button-secondary: #9e9e9e;
+
+  // === 渐变 ===
+  --gradient-primary: linear-gradient(135deg, #1845ad 0%, #23a2f6 100%);
+  --gradient-secondary: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%); /* 深色主题：神秘的紫色 */
+  --gradient-success: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  --gradient-warning: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+  --gradient-accent: linear-gradient(135deg, #ff6b35 0%, #ff8a65 100%); /* 深色主题：温暖的橙红色 */
+
+  // === 页面背景渐变 ===
+  --gradient-page-bg: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  --gradient-hero-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #7209b7 100%);
+  --gradient-features-bg: linear-gradient(135deg, #16213e 0%, #0f3460 30%, #533483 70%, #7209b7 100%);
+  --gradient-content-bg: linear-gradient(135deg, #0f3460 0%, #533483 30%, #7209b7 70%, #16213e 100%);
+  --gradient-section-title: linear-gradient(135deg, #90caf9, #ce93d8, #ffb74d);
+
+  // === 玻璃拟态效果 ===
+  --glass-bg: rgba(255, 255, 255, 0.13);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-input-bg: rgba(255, 255, 255, 0.07);
+  --glass-input-focus: rgba(255, 255, 255, 0.15);
+  --shadow-glass: 0 0 40px rgba(8, 7, 16, 0.6);
+
+  // === 按钮样式 ===
+  --color-button-text: #333333; /* 深色文字用于浅色按钮 */
+  --color-button-primary-hover: #f5f5f5; /* 更浅的灰色悬停效果 */
+
+  // === 特殊文本颜色 ===
+  --color-text-placeholder: #e5e5e5;
+
+  // === 登录页面专用背景 ===
+  --color-login-bg: #080710;
+}
+
+// === SCSS 变量映射（用于现有的 SCSS 代码） ===
+// 这些变量会根据当前主题自动更新
+$color-primary: var(--color-primary);
+$color-primary-light: var(--color-primary-light);
+$color-primary-dark: var(--color-primary-dark);
+$color-secondary: var(--color-secondary);
+
+$color-bg-primary: var(--color-bg-primary);
+$color-bg-secondary: var(--color-bg-secondary);
+$color-bg-tertiary: var(--color-bg-tertiary);
+$color-bg-elevated: var(--color-bg-elevated);
+
+$color-text-primary: var(--color-text-primary);
+$color-text-secondary: var(--color-text-secondary);
+$color-text-tertiary: var(--color-text-tertiary);
+$color-text-muted: var(--color-text-muted);
+
+$color-border-primary: var(--color-border-primary);
+$color-border-secondary: var(--color-border-secondary);
+$color-border-focus: var(--color-border-focus);
+
+$color-success: var(--color-success);
+$color-warning: var(--color-warning);
+$color-error: var(--color-error);
+$color-info: var(--color-info);
+
+$gradient-primary: var(--gradient-primary);
+$gradient-secondary: var(--gradient-secondary);
+
+// === 主题切换动画 ===
+* {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+// === 通用主题类 ===
+.theme-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text-primary);
+}
+
+.theme-input {
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-text-primary);
+
+  &:focus {
+    border-color: var(--color-border-focus);
+  }
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+}
+
+.theme-button-primary {
+  background-color: var(--color-button-primary);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-button-primary);
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+}
+
+.theme-button-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
+
+  &:hover {
+    background-color: var(--color-bg-tertiary);
+  }
+}
+
+// === 滚动条主题化 ===
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-secondary);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--color-text-muted);
+  }
+}

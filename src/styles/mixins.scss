@@ -1,0 +1,172 @@
+// === 布局相关 Mixins ===
+
+// 水平垂直居中
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 垂直方向flex居中
+@mixin flex-column-center {
+  @include flex-center;
+  flex-direction: column;
+}
+
+// 水平方向flex居中
+@mixin flex-row-center {
+  @include flex-center;
+  flex-direction: row;
+}
+
+// 两端对齐
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// 左对齐
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+// 右对齐
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// === 定位相关 Mixins ===
+
+// 全屏绝对定位
+@mixin full-absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// 全屏固定定位
+@mixin full-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// 绝对居中
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// === 文本相关 Mixins ===
+
+// 文本溢出省略号（单行）
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 文本溢出省略号（多行）
+@mixin text-ellipsis-multiline($lines: 2) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+// 清除默认样式
+@mixin reset-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+// === 视觉效果相关 Mixins ===
+
+// 玻璃拟态效果
+@mixin glassmorphism($bg: rgba(255, 255, 255, 0.1), $blur: 10px, $border: rgba(255, 255, 255, 0.2)) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $border;
+  border-radius: 8px;
+}
+
+// 阴影效果
+@mixin box-shadow($shadow: 0 4px 6px rgba(0, 0, 0, 0.1)) {
+  box-shadow: $shadow;
+}
+
+// 渐变背景
+@mixin gradient-bg($start: #667eea, $end: #764ba2, $direction: 45deg) {
+  background: linear-gradient($direction, $start, $end);
+}
+
+// === 响应式相关 Mixins ===
+
+// 响应式断点
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 767px) { @content; }
+  }
+  @if $breakpoint == tablet {
+    @media (min-width: 768px) and (max-width: 1023px) { @content; }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: 1024px) { @content; }
+  }
+  @if $breakpoint == large-desktop {
+    @media (min-width: 1200px) { @content; }
+  }
+}
+
+// === 动画相关 Mixins ===
+
+// 渐变过渡
+@mixin transition($property: all, $duration: 0.3s, $ease: ease) {
+  transition: $property $duration $ease;
+}
+
+// 悬停效果
+@mixin hover-effect($scale: 1.05, $duration: 0.2s) {
+  @include transition(transform, $duration);
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+// 加载动画
+@mixin loading-spinner($size: 20px, $color: #409eff) {
+  width: $size;
+  height: $size;
+  border: 2px solid rgba($color, 0.2);
+  border-top: 2px solid $color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// 文本阴影
+@mixin text-shadow($shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)) {
+  text-shadow: $shadow;
+} 

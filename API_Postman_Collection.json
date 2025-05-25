@@ -1,0 +1,813 @@
+{
+  "info": {
+    "name": "医疗学习平台 API",
+    "description": "医疗学习平台后端API接口测试集合，基于前端services文件结构",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. 认证相关 API",
+      "item": [
+        {
+          "name": "用户登录",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"student1\",\n  \"password\": \"user123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.to.have.status(200)) {",
+                  "    const responseJson = pm.response.json();",
+                  "    if (responseJson.success && responseJson.data.token) {",
+                  "        pm.collectionVariables.set('token', responseJson.data.token);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "管理员登录",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"superadmin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.to.have.status(200)) {",
+                  "    const responseJson = pm.response.json();",
+                  "    if (responseJson.success && responseJson.data.token) {",
+                  "        pm.collectionVariables.set('adminToken', responseJson.data.token);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "用户注册",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser{{$randomInt}}\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "获取当前用户信息",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. 用户管理 API",
+      "item": [
+        {
+          "name": "获取用户列表",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?page=1&limit=10&role=all&status=active&search=",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "role",
+                  "value": "all"
+                },
+                {
+                  "key": "status",
+                  "value": "active"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "获取单个用户信息",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/101",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "101"]
+            }
+          }
+        },
+        {
+          "name": "创建用户",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"newuser{{$randomInt}}\",\n  \"password\": \"password123\",\n  \"email\": \"newuser{{$randomInt}}@example.com\",\n  \"avatar\": \"https://example.com/avatar.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "更新用户信息",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"updateduser\",\n  \"email\": \"updated@example.com\",\n  \"avatar\": \"https://example.com/new-avatar.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/101",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "101"]
+            }
+          }
+        },
+        {
+          "name": "更新用户密码",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"user123\",\n  \"newPassword\": \"newpass123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/101/password",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "101", "password"]
+            }
+          }
+        },
+        {
+          "name": "更新用户状态",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"banned\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/101/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "101", "status"]
+            }
+          }
+        },
+        {
+          "name": "创建管理员",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"newadmin{{$randomInt}}\",\n  \"password\": \"admin123\",\n  \"email\": \"newadmin{{$randomInt}}@example.com\",\n  \"isSuperAdmin\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/admin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "admin"]
+            }
+          }
+        },
+        {
+          "name": "检查是否为超级管理员",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/is-super-admin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "is-super-admin"]
+            }
+          }
+        },
+        {
+          "name": "删除用户",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "999"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. 医疗知识 API",
+      "item": [
+        {
+          "name": "获取知识列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge?page=1&pageSize=10&categoryId=1&keyword=heart",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "1"
+                },
+                {
+                  "key": "keyword",
+                  "value": "heart"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "获取知识详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1"]
+            }
+          }
+        },
+        {
+          "name": "创建知识",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"新的医疗知识\",\n  \"content\": \"详细的医疗知识内容...\",\n  \"summary\": \"知识摘要\",\n  \"categoryId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge"]
+            }
+          }
+        },
+        {
+          "name": "更新知识",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"更新的标题\",\n  \"content\": \"更新的内容...\",\n  \"summary\": \"更新的摘要\",\n  \"categoryId\": 2\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1"]
+            }
+          }
+        },
+        {
+          "name": "删除知识",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1"]
+            }
+          }
+        },
+        {
+          "name": "知识点赞",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1/like",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1", "like"]
+            }
+          }
+        },
+        {
+          "name": "增加知识浏览量",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1/view",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1", "view"]
+            }
+          }
+        },
+        {
+          "name": "获取知识相关心得",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/knowledge/1/experiences?page=1&pageSize=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "knowledge", "1", "experiences"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. 学习心得 API",
+      "item": [
+        {
+          "name": "获取心得列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/experience?page=1&pageSize=10&status=approved&userId=101&knowledgeId=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "approved"
+                },
+                {
+                  "key": "userId",
+                  "value": "101"
+                },
+                {
+                  "key": "knowledgeId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "获取心得详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "1"]
+            }
+          }
+        },
+        {
+          "name": "创建心得",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"新的学习心得\",\n  \"content\": \"详细的学习心得内容...\",\n  \"knowledgeId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/experience",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience"]
+            }
+          }
+        },
+        {
+          "name": "更新心得",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"更新的心得标题\",\n  \"content\": \"更新的心得内容...\",\n  \"knowledgeId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "1"]
+            }
+          }
+        },
+        {
+          "name": "删除心得",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "1"]
+            }
+          }
+        },
+        {
+          "name": "审核心得",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"reviewComment\": \"审核通过\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/1/review",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "1", "review"]
+            }
+          }
+        },
+        {
+          "name": "获取我的心得",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/my?page=1&pageSize=10&status=all&knowledgeId=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "my"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "all"
+                },
+                {
+                  "key": "knowledgeId",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "心得点赞",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/experience/1/like",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "experience", "1", "like"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. 分类管理 API",
+      "item": [
+        {
+          "name": "获取医疗分类列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categories"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. 首页统计 API",
+      "item": [
+        {
+          "name": "获取首页统计数据",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/home/statistics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "home", "statistics"]
+            }
+          }
+        },
+        {
+          "name": "获取最新知识列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/home/knowledge/latest?page=1&pageSize=10&categoryId=1&sortBy=latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "home", "knowledge", "latest"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "categoryId",
+                  "value": "1"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "latest"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "获取最新心得列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/home/experience/latest?page=1&pageSize=10&status=approved&sortBy=latest",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "home", "experience", "latest"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "approved"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "latest"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
